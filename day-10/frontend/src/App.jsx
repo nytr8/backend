@@ -11,7 +11,7 @@ const App = () => {
 
   const getItems = async () => {
     axios
-      .get("http://localhost:3000/notes")
+      .get("https://backend-w52w.onrender.com/notes")
       .then((res) => setstoreNotes(res.data.notes));
   };
   useEffect(() => {
@@ -24,7 +24,7 @@ const App = () => {
     const { title, description } = e.target.elements;
     // console.log(title.value, description.value);
     axios
-      .post("http://localhost:3000/notes", {
+      .post("https://backend-w52w.onrender.com/notes", {
         title: title.value,
         description: description.value,
       })
@@ -36,17 +36,21 @@ const App = () => {
   }
   function handleDelete(id) {
     // console.log(id);
-    axios.delete("http://localhost:3000/notes/" + id).then((res) => {
-      console.log(res.data);
-      getItems();
-    });
+    axios
+      .delete("https://backend-w52w.onrender.com/notes/" + id)
+      .then((res) => {
+        console.log(res.data);
+        getItems();
+      });
   }
   function handleUpdate(id) {
-    axios.patch("http://localhost:3000/notes/" + id, editData).then((res) => {
-      console.log(res.data);
-      setEditId(null); // close edit mode
-      getItems();
-    });
+    axios
+      .patch("https://backend-w52w.onrender.com/notes/" + id, editData)
+      .then((res) => {
+        console.log(res.data);
+        setEditId(null); // close edit mode
+        getItems();
+      });
   }
 
   return (
