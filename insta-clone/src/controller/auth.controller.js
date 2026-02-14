@@ -1,6 +1,7 @@
 import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+
 async function registerController(req, res) {
   //get user data from body
   const { userName, email, password, bio, profileImage } = req.body;
