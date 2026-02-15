@@ -15,7 +15,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  bio: String,
+  bio: {
+    type: String,
+    default: "",
+  },
   profileImage: {
     type: String,
     default:
@@ -23,6 +26,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-const userModel = mongoose.model("User", userSchema);
+const userModel = mongoose.model("Users", userSchema);
 
 export default userModel;
