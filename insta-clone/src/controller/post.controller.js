@@ -44,4 +44,71 @@ async function postController(req, res) {
   });
 }
 
-export default postController;
+async function getPostsController(req, res) {
+  const token = req.cookies.token;
+  if (!token) {
+    res.status(401).json({
+      message: "unauthorized access",
+    });
+  }
+  let decoded = null;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    res.status(401).json({
+      message: "invalid token",
+    });
+  }
+  let userId = decoded.id;
+
+  const userPosts = await postModel.find({
+    user: userId,
+  });
+  if (!userPosts) {
+    res.status(404).json({
+      message: "resorce not found",
+    });
+  }
+  // res.send(userPosts);
+  res.status(200).json({
+    message: "get posts succesfully",
+    userPosts,
+  });
+}
+async function getPostsDetails(req, res) {
+  const token = req.cookies.token;
+  if (!token) {
+    res.status(401).json({
+      message: "unauthorized access",
+    });
+  }
+  let decoded = null;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    res.status(401).json({
+      message: "invalid token",
+    });
+  }
+  let userId = decoded.id;
+  let postId = req.params.postId;
+
+  const post = await postModel.findById(postId);
+  if (!post) {
+    return res.status(404).json({
+      message: "Post not found.",
+    });
+  }
+  let isValidPostDetails = post.user.toString() === userId;
+  if (!isValidPostDetails) {
+    res.status(403).json({
+      message: "forbidden content",
+    });
+  }
+  return res.status(200).json({
+    message: "get post details succesfully",
+    post,
+  });
+}
+
+export { postController, getPostsController, getPostsDetails };
