@@ -5,11 +5,12 @@ import {
   postController,
 } from "../controller/post.controller.js";
 import multer from "multer";
+import authenticateUser from "../middlewares/identifyUser.js";
 const postRouter = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-postRouter.post("/", upload.single("media"), postController);
-postRouter.get("/", getPostsController);
-postRouter.get("/details/:postId", getPostsDetails);
+postRouter.post("/", upload.single("media"), authenticateUser, postController);
+postRouter.get("/", authenticateUser, getPostsController);
+postRouter.get("/details/:postId", authenticateUser, getPostsDetails);
 
 export default postRouter;

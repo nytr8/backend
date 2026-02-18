@@ -10,22 +10,6 @@ const imagekit = new ImageKit({
 async function postController(req, res) {
   const { caption } = req.body;
 
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json({
-      message: "unauthenticated user",
-    });
-  }
-
-  let jwttoken = null;
-  try {
-    jwttoken = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    res.status(401).json({
-      message: "token unverified",
-    });
-  }
-
   const file = await imagekit.files.upload({
     file: await toFile(Buffer.from(req.file.buffer), req.file.originalname),
     fileName: req.file.originalname,
@@ -35,7 +19,7 @@ async function postController(req, res) {
   const post = await postModel.create({
     caption: caption,
     media: file.url,
-    user: jwttoken.id,
+    user: req.user.id,
   });
   res.status(201).json({
     message: "created a post succesfully",
@@ -45,21 +29,7 @@ async function postController(req, res) {
 }
 
 async function getPostsController(req, res) {
-  const token = req.cookies.token;
-  if (!token) {
-    res.status(401).json({
-      message: "unauthorized access",
-    });
-  }
-  let decoded = null;
-  try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    res.status(401).json({
-      message: "invalid token",
-    });
-  }
-  let userId = decoded.id;
+  let userId = req.user.id;
 
   const userPosts = await postModel.find({
     user: userId,
@@ -75,22 +45,9 @@ async function getPostsController(req, res) {
     userPosts,
   });
 }
+
 async function getPostsDetails(req, res) {
-  const token = req.cookies.token;
-  if (!token) {
-    res.status(401).json({
-      message: "unauthorized access",
-    });
-  }
-  let decoded = null;
-  try {
-    decoded = jwt.verify(token, process.env.JWT_SECRET);
-  } catch (error) {
-    res.status(401).json({
-      message: "invalid token",
-    });
-  }
-  let userId = decoded.id;
+  let userId = req.user.id;
   let postId = req.params.postId;
 
   const post = await postModel.findById(postId);

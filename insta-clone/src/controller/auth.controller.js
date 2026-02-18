@@ -30,9 +30,13 @@ async function registerController(req, res) {
     bio,
     profileImage,
   });
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
+  const token = jwt.sign(
+    { id: user._id, username: user.userName },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1d",
+    },
+  );
   res.cookie("jwt_token", token);
   res.status(201).json({
     message: "user registered succesfully",
@@ -69,9 +73,13 @@ async function loginController(req, res) {
       message: "incorrect password",
     });
   }
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
+  const token = jwt.sign(
+    { id: user._id, username: user.userName },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1d",
+    },
+  );
   res.cookie("token", token);
   res.status(200).json({
     message: "logged in succesfully",

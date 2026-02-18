@@ -1,0 +1,66 @@
+import followModel from "../models/follow.model.js";
+import userModel from "../models/user.model.js";
+
+async function followUserController(req, res) {
+  const follower = req.user.username;
+  const followee = req.params.userName;
+  const isFolloweeExists = await userModel.findOne({
+    userName: followee,
+  });
+  if (!isFolloweeExists) {
+    return res.status(404).json({
+      message: "who you are trying to follow doesnt exists",
+    });
+  }
+  const isAlreadyFollowed = await followModel.findOne({
+    follower: follower,
+    followee: followee,
+  });
+  if (isAlreadyFollowed) {
+    return res.status(404).json({
+      message: "you already follows him",
+    });
+  }
+  const isSelfFollower = follower === followee;
+  if (isSelfFollower) {
+    return res.status(404).json({
+      message: "you cannot follow youe self",
+    });
+  }
+
+  const followUser = await followModel.create({
+    follower: follower,
+    followee: followee,
+  });
+  res.status(201).json({
+    message: `successfully follows ${followee}`,
+    followUser,
+  });
+}
+async function unfollowUserController(req, res) {
+  const follower = req.user.username;
+  const followee = req.params.userName;
+  if (follower == followee) {
+    return res.status(401).json({
+      message: "you cant unfollow yourself",
+    });
+  }
+  const followedUser = await followModel.findOne({
+    follower: follower,
+    followee: followee,
+  });
+  if (!followedUser) {
+    return res.status(401).json({
+      message: "you are not following this user",
+    });
+  }
+  const deleteFollow = await followModel.findByIdAndDelete({
+    _id: followedUser._id,
+  });
+  res.status(200).json({
+    message: "unfollow succesfully",
+    deleteFollow,
+  });
+}
+
+export { followUserController, unfollowUserController };
