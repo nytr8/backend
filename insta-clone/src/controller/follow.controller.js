@@ -31,9 +31,10 @@ async function followUserController(req, res) {
   const followUser = await followModel.create({
     follower: follower,
     followee: followee,
+    status: "pending",
   });
   res.status(201).json({
-    message: `successfully follows ${followee}`,
+    message: `follow request sent to ${followee}`,
     followUser,
   });
 }
@@ -59,5 +60,28 @@ async function unfollowUserController(req, res) {
     deleteFollow,
   });
 }
+async function acceptFollowRequest(req, res) {
+  const follower = req.user.username;
+  const followee = req.params.userName;
 
-export { followUserController, unfollowUserController };
+  const request = await followModel.findOneAndUpdate(
+    {
+      follower,
+      followee,
+      status: "pending",
+    },
+    { status: "accepted" },
+    { returnDocument: "after" },
+  );
+  if (!request) {
+    return res.status(404).json({
+      message: "follow request not found",
+    });
+  }
+  res.status(200).json({
+    message: "follow request accepted",
+    request,
+  });
+}
+
+export { followUserController, unfollowUserController, acceptFollowRequest };

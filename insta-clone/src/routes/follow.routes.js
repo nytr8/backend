@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  acceptFollowRequest,
   followUserController,
   unfollowUserController,
 } from "../controller/follow.controller.js";
@@ -12,6 +13,11 @@ followRouter.post(
   "/unfollow/:userName",
   authenticateUser,
   unfollowUserController,
+);
+followRouter.post(
+  "/accept-req/:userName",
+  authenticateUser,
+  acceptFollowRequest,
 );
 
 export default followRouter;
