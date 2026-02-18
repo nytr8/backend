@@ -3,6 +3,7 @@ import authRouter from "./routes/auth.routes.js";
 import cookieParser from "cookie-parser";
 import postRouter from "./routes/post.routes.js";
 import followRouter from "./routes/follow.routes.js";
+import likeRouter from "./routes/like.routes.js";
 
 const app = express();
 app.use(express.json());
@@ -10,4 +11,5 @@ app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/", followRouter);
+app.use("/api/", likeRouter);
 export default app;
