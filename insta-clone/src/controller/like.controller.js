@@ -16,7 +16,7 @@ async function likeController(req, res) {
     postId: postId,
   });
   if (isLikeExists) {
-    return res.status(401).json({
+    return res.status(409).json({
       message: "already liked this post",
     });
   }

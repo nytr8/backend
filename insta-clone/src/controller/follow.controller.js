@@ -17,13 +17,13 @@ async function followUserController(req, res) {
     followee: followee,
   });
   if (isAlreadyFollowed) {
-    return res.status(404).json({
+    return res.status(409).json({
       message: "you already follows him",
     });
   }
   const isSelfFollower = follower === followee;
   if (isSelfFollower) {
-    return res.status(404).json({
+    return res.status(409).json({
       message: "you cannot follow youe self",
     });
   }
@@ -41,22 +41,19 @@ async function unfollowUserController(req, res) {
   const follower = req.user.username;
   const followee = req.params.userName;
   if (follower == followee) {
-    return res.status(401).json({
+    return res.status(400).json({
       message: "you cant unfollow yourself",
     });
   }
-  const followedUser = await followModel.findOne({
+  const deleteFollow = await followModel.findOneAndDelete({
     follower: follower,
     followee: followee,
   });
-  if (!followedUser) {
-    return res.status(401).json({
+  if (!deleteFollow) {
+    return res.status(404).json({
       message: "you are not following this user",
     });
   }
-  const deleteFollow = await followModel.findByIdAndDelete({
-    _id: followedUser._id,
-  });
   res.status(200).json({
     message: "unfollow succesfully",
     deleteFollow,
