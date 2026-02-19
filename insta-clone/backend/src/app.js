@@ -4,8 +4,9 @@ import cookieParser from "cookie-parser";
 import postRouter from "./routes/post.routes.js";
 import followRouter from "./routes/follow.routes.js";
 import likeRouter from "./routes/like.routes.js";
-
+import cors from "cors";
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth", authRouter);
