@@ -11,14 +11,15 @@ const Login = () => {
   if (loading) {
     return <h1>Loading...</h1>;
   }
-  
+
   async function handleSubmit(e) {
     e.preventDefault();
 
-    handleLogin(username, password).then((res) => {
+    const res = await handleLogin(username, password).then((res) => {
       console.log(res);
       navigate("/");
     });
+    console.log(res);
     setUsername("");
     setPassword("");
   }
