@@ -1,0 +1,85 @@
+.post-cards {
+  width: 100%;
+  max-width: 470px;
+  border-radius: 5px;
+  font-family: "Segoe UI", sans-serif;
+  flex-shrink: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  color: white !important;
+  background-color: #323234;
+  padding: 10px;
+  .top {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    height: 50px;
+    background-color: #323234;
+
+    .profileimage-container {
+      width: 35px;
+      height: 35px;
+      background-color: red;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 0, 0, 0);
+      background: conic-gradient(
+          #feda75,
+          #fa7e1e,
+          #d62976,
+          #962fbf,
+          #4f5bd5,
+          #feda75
+        )
+        border-box;
+      .profile-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+
+    .username {
+      font-size: 14px;
+      font-weight: 600;
+      flex: 1;
+      margin-left: 10px;
+    }
+  }
+
+  .postimage-container {
+    border-radius: 5px;
+    overflow: hidden;
+    width: 100%;
+    background: #000;
+    height: 550px;
+    .post-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .bot {
+    padding: 10px 5px;
+    background-color: #323234;
+    overflow: hidden;
+    height: 70px;
+    .icons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .caption {
+      margin-block: 5px;
+      font-size: 14px;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: 0.3s ease;
+  }
+}

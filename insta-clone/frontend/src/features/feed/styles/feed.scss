@@ -1,0 +1,12 @@
+.post-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #121212; // Instagram light gray
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  gap: 10px;
+  scroll-behavior: smooth;
+}

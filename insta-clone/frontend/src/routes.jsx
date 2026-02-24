@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./features/pages/auth/Login";
-import Register from "./features/pages/auth/Register";
-import Home from "./features/pages/home/Home";
+import Login from "./features/auth/pages/auth/Login";
+import Register from "./features/auth/pages/auth/Register";
+import Home from "./features/auth/pages/home/Home";
 const AppRoutes = () => {
   return (
     <BrowserRouter>
