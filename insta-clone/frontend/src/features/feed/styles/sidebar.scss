@@ -76,4 +76,16 @@
       }
     }
   }
+  .logout-btn {
+    margin-top: auto;
+    margin-bottom: 16px;
+    background-color: #e03535;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    &:hover {
+      background-color: #c02020;
+    }
+  }
 }

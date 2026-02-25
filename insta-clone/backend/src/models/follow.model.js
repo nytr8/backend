@@ -3,12 +3,14 @@ import mongoose from "mongoose";
 const followSchema = new mongoose.Schema(
   {
     follower: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: [true, "follower is required"],
+      ref: "Users",
     },
     followee: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: [true, "followee is required"],
+      ref: "Users",
     },
     status: {
       type: String,

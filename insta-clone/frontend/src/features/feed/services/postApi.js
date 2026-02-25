@@ -47,3 +47,4 @@ export async function likePost(postId) {
   }
   return res.data;
 }
+

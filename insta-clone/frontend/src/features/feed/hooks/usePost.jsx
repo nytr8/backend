@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { getAllPosts, likePost, postCreate } from "../services/postApi.js";
-import { PostContextProvider } from "../feedContext.jsx";
+import { PostContextProvider } from "../FeedContext.jsx";
 
 const usePost = () => {
   const { postData, setpostData, loading, setloading } =

@@ -39,4 +39,16 @@ async function register(username, email, password) {
   return res.data;
 }
 
-export { login, register };
+async function logout() {
+  try {
+    await axios.post(
+      "http://localhost:3000/api/auth/logout",
+      {},
+      { withCredentials: true },
+    );
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { login, register, logout };
