@@ -7,7 +7,7 @@ import {
   RiSendPlaneLine,
 } from "@remixicon/react";
 
-const Post = ({ elem }) => {
+const Post = ({ elem, handleLike }) => {
   console.log(elem);
   return (
     <div key={elem._id} className="post-cards">
@@ -28,12 +28,18 @@ const Post = ({ elem }) => {
         <div className="icons">
           {elem.isLiked ? (
             <RiHeart3Fill
+              onClick={() => {
+                handleLike(elem._id);
+              }}
               size={24} // set custom `width` and `height`
               color="red" // set `fill` color
               className="my-icon" // add custom class name
             />
           ) : (
             <RiHeart3Line
+              onClick={() => {
+                handleLike(elem._id);
+              }}
               size={24} // set custom `width` and `height`
               color="white" // set `fill` color
               className="my-icon" // add custom class name

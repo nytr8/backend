@@ -23,8 +23,7 @@ async function postController(req, res) {
   });
   res.status(201).json({
     message: "created a post succesfully",
-    media: post.media,
-    caption,
+    post,
   });
 }
 

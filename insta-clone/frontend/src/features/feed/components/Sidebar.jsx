@@ -1,9 +1,12 @@
 import React from "react";
 import "../styles/sidebar.scss";
+import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <div className="sidecontainer">
-      <h1 className="createpost-btn btn">create post</h1>
+      <Link to={"/postcreate"} className="createpost-btn btn">
+        create post
+      </Link>
       <div>
         <div className="names-container following-container">
           <h1 className="headings">following</h1>

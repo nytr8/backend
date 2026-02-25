@@ -16,8 +16,14 @@ async function likeController(req, res) {
     postId: postId,
   });
   if (isLikeExists) {
-    return res.status(409).json({
-      message: "already liked this post",
+    let post = await likeModel.deleteOne({
+      userName: username,
+      postId: postId,
+    });
+
+    return res.status(200).json({
+      message: "unliked successfully",
+      post,
     });
   }
   const post = await likeModel.create({
