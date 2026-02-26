@@ -12,6 +12,9 @@ const Register = () => {
   if (loading) {
     return <h1>Loading...</h1>;
   }
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:3000/api/auth/google";
+  };
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await handleRegister(username, email, password).then((res) => {
@@ -59,6 +62,9 @@ const Register = () => {
           placeholder="enter password"
         />
         <button className="submit-btn">Register</button>
+        <button onClick={handleGoogleLogin} className="submit-btn goooglelogin">
+          google
+        </button>
       </form>
       <p>
         already registered ?<Link to="/login"> Login here</Link>

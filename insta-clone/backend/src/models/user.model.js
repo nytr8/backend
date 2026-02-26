@@ -13,13 +13,24 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
     select: false,
   },
+
+  provider: {
+    type: String,
+    enum: ["local", "google"],
+    default: "local",
+  },
+
+  providerId: {
+    type: String,
+  },
+
   bio: {
     type: String,
     default: "",
   },
+
   profileImage: {
     type: String,
     default:

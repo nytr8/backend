@@ -99,4 +99,5 @@ async function logoutController(req, res) {
   res.status(200).json({ message: "logged out successfully" });
 }
 
+
 export { registerController, loginController, logoutController };
