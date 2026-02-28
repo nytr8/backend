@@ -6,18 +6,18 @@ export async function getAllPosts() {
     res = await axios.get("http://localhost:3000/api/posts/allpost", {
       withCredentials: true,
     });
-    console.log(res.data);
+    return res.data;
+    // console.log(res.data);
   } catch (error) {
     console.log(error);
-    throw error;
+    return null;
   }
-  return res.data;
 }
 export async function postCreate(formData) {
   let res = null;
   try {
     res = await axios.post(
-      "http://localhost:3000/api/posts/",
+      "http://localhost:3000/api/posts/create",
 
       formData,
 
@@ -47,4 +47,3 @@ export async function likePost(postId) {
   }
   return res.data;
 }
-

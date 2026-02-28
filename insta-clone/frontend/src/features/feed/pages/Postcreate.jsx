@@ -9,9 +9,9 @@ const Postcreate = () => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [caption, setCaption] = useState("");
-//   if (!loading) {
-//     return <h1>loading...</h1>;
-//   }
+  if (loading) {
+    return <h1>loading...</h1>;
+  }
   async function handleForm(e) {
     e.preventDefault();
     if (!file) {

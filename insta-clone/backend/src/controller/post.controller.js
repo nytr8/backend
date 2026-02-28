@@ -7,7 +7,7 @@ const imagekit = new ImageKit({
   privateKey: process.env.IMAGEKIT_PRIVATE_KEY,
 });
 
-async function postController(req, res) {
+async function postCreateController(req, res) {
   const { caption } = req.body;
 
   const file = await imagekit.files.upload({
@@ -27,7 +27,7 @@ async function postController(req, res) {
   });
 }
 
-async function getPostsController(req, res) {
+async function getUserPostController(req, res) {
   let userId = req.user.id;
 
   const userPosts = await postModel.find({
@@ -92,4 +92,9 @@ async function getAllPosts(req, res) {
   });
 }
 
-export { postController, getPostsController, getPostsDetails, getAllPosts };
+export {
+  postCreateController,
+  getUserPostController,
+  getPostsDetails,
+  getAllPosts,
+};

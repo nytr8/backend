@@ -37,7 +37,7 @@ async function registerController(req, res) {
       expiresIn: "1d",
     },
   );
-  res.cookie("jwt_token", token);
+  res.cookie("token", token);
   res.status(201).json({
     message: "user registered succesfully",
     user: {
@@ -98,6 +98,5 @@ async function logoutController(req, res) {
   res.clearCookie("token");
   res.status(200).json({ message: "logged out successfully" });
 }
-
 
 export { registerController, loginController, logoutController };

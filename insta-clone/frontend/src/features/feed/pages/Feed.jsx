@@ -5,16 +5,16 @@ import "../styles/feed.scss";
 import Post from "../components/Post";
 
 const Feed = () => {
-  const { postData, handleAllPost, handleLike } = usePost();
+  const { postData, handleGetAllPost } = usePost();
   console.log(postData);
   useEffect(() => {
-    handleAllPost();
+    handleGetAllPost();
   }, []);
   console.log(postData);
   return (
     <div className="post-container">
       {postData.map((elem) => (
-        <Post elem={elem} handleLike={handleLike} />
+        <Post elem={elem} />
       ))}
     </div>
   );

@@ -1,7 +1,7 @@
 import followModel from "../models/follow.model.js";
 import userModel from "../models/user.model.js";
 
-async function followUserController(req, res) {
+async function followRequestSentController(req, res) {
   const follower = req.user.id;
   const followee = req.params.id;
   const isFolloweeExists = await userModel.findOne({
@@ -83,61 +83,9 @@ async function acceptFollowRequest(req, res) {
     request,
   });
 }
-async function getMyFollowers(req, res) {
-  const myId = req.user.id;
 
-  const followers = await followModel
-    .find({ followee: myId, status: "accepted" })
-    .populate("follower", "userName profileImage"); // adjust fields as needed
-
-  res.status(200).json({
-    message: "followers fetched successfully",
-    count: followers.length,
-    followers,
-  });
-}
-async function getMyFollowing(req, res) {
-  const myId = req.user.id;
-
-  const following = await followModel
-    .find({ follower: myId, status: { $in: ["accepted", "pending"] } })
-    .populate("followee", "userName profileImage");
-
-  res.status(200).json({
-    message: "following fetched successfully",
-    count: following.length,
-    following,
-  });
-}
-async function getPendingRequests(req, res) {
-  const myId = req.user.id;
-
-  const pending = await followModel
-    .find({ followee: myId, status: "pending" })
-    .populate("follower", "userName profileImage");
-
-  res.status(200).json({
-    message: "pending requests fetched",
-    count: pending.length,
-    pending,
-  });
-}
-async function getAllUserController(req, res) {
-  const users = await userModel
-    .find({ _id: { $ne: req.user.id } })
-    .select("userName profileImage");
-  res.status(200).json({
-    message: "all users fetched",
-    count: users.length,
-    users,
-  });
-}
 export {
-  followUserController,
+  followRequestSentController,
   unfollowUserController,
   acceptFollowRequest,
-  getMyFollowers,
-  getMyFollowing,
-  getPendingRequests,
-  getAllUserController,
 };

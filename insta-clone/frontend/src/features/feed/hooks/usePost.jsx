@@ -6,11 +6,12 @@ const usePost = () => {
   const { postData, setpostData, loading, setloading } =
     useContext(PostContextProvider);
 
-  async function handleAllPost() {
+  async function handleGetAllPost() {
     let data = null;
     setloading(true);
     try {
       data = await getAllPosts();
+      if (!data) return;
       setpostData(data.allpost);
     } catch (error) {
       console.log(error);
@@ -56,7 +57,7 @@ const usePost = () => {
   return {
     loading,
     postData,
-    handleAllPost,
+    handleGetAllPost,
     handleCreatePost,
     handleLike,
   };

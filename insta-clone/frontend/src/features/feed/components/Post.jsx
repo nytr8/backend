@@ -6,9 +6,11 @@ import {
   RiHeart3Line,
   RiSendPlaneLine,
 } from "@remixicon/react";
+import usePost from "../hooks/usePost";
 
-const Post = ({ elem, handleLike }) => {
-  console.log(elem);
+const Post = ({ elem }) => {
+  const { handleLike } = usePost();
+
   return (
     <div key={elem._id} className="post-cards">
       <div className="top">

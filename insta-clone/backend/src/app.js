@@ -5,19 +5,12 @@ import postRouter from "./routes/post.routes.js";
 import followRouter from "./routes/follow.routes.js";
 import likeRouter from "./routes/like.routes.js";
 import cors from "cors";
-import passport from "./config/Passport.js";
 
 const app = express();
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  }),
-);
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(passport.initialize());
 app.use("/api/auth", authRouter);
 app.use("/api/posts", postRouter);
 app.use("/api/", followRouter);
