@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import userModel from "../models/user.model.js";
 import bcrypt from "bcrypt";
-import blacklistModel from "../models/blacklist.model.js";
+import redis from "../config/redisClient.js";
 
 async function authController(req, res) {
   const { username, email, password } = req.body;
@@ -82,7 +82,7 @@ async function getMe(req, res) {
 async function logoutController(req, res) {
   const token = req.cookies.token;
   res.clearCookie("token");
-  await blacklistModel.create({ token });
+  await redis.set(token, Date.now().toString(), "EX", 0.5 * 60 * 60);
   res.status(200).json({
     message: "user logged out successfully",
   });

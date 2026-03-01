@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import blacklistModel from "../models/blacklist.model.js";
+import redis from "../config/redisClient.js";
 
 async function identifyUser(req, res, next) {
   const token = req.cookies.token;
@@ -8,10 +9,10 @@ async function identifyUser(req, res, next) {
       message: "unauthorized",
     });
   }
-  const isTokenBlacklisted = await blacklistModel.findOne({ token });
+  const isTokenBlacklisted = await redis.get(token);
   if (isTokenBlacklisted) {
     return res.status(400).json({
-      message: "unauthorized",
+      message: "token is invalid",
     });
   }
   let decoded;
