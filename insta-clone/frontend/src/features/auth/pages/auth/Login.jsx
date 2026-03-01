@@ -15,10 +15,10 @@ const Login = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const res = await handleLogin(username, password).then((res) => {
-      console.log(res);
-      navigate("/");
-    });
+    const res = await handleLogin(username, password);
+    console.log(res);
+    navigate("/");
+
     console.log(res);
     setUsername("");
     setPassword("");

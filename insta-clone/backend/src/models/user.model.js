@@ -15,17 +15,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     select: false,
   },
-
-  provider: {
-    type: String,
-    enum: ["local", "google"],
-    default: "local",
-  },
-
-  providerId: {
-    type: String,
-  },
-
   bio: {
     type: String,
     default: "",

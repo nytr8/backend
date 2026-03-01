@@ -17,11 +17,11 @@ const Post = ({ elem }) => {
         <div className="profileimage-container">
           <img
             className="profile-image"
-            src={elem.user.profileImage}
+            src={elem?.user?.profileImage}
             alt="Post media"
           />
         </div>
-        <h2 className="username">{elem.user.userName}</h2>
+        <h2 className="username">{elem?.user?.userName}</h2>
       </div>
       <div className="postimage-container">
         <img className="post-image" src={elem.media} alt="Post media" />

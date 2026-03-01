@@ -4,6 +4,7 @@ import Register from "./features/auth/pages/auth/Register";
 import Home from "./features/auth/pages/home/Home";
 import Postcreate from "./features/feed/pages/Postcreate";
 import RequireAuth from "./features/auth/components/RequireAuth";
+import UserProfile from "./features/auth/pages/auth/userProfile";
 
 const AppRoutes = () => {
   return (
@@ -28,6 +29,14 @@ const AppRoutes = () => {
           element={
             <RequireAuth>
               <Postcreate />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/userprofile/:userId"
+          element={
+            <RequireAuth>
+              <UserProfile />
             </RequireAuth>
           }
         />

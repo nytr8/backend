@@ -33,9 +33,8 @@ async function register(username, email, password) {
       },
     );
   } catch (error) {
-    throw error;
+    console.log(error);
   }
-
   return res.data;
 }
 
@@ -50,5 +49,20 @@ async function logout() {
     throw error;
   }
 }
+async function getMe() {
+  let res = null;
+  try {
+    res = await axios.get(
+      "http://localhost:3000/api/auth/get-me",
+      {},
+      { withCredentials: true },
+    );
+    console.log(res.data);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+  return res.data;
+}
 
-export { login, register, logout };
+export { login, register, logout, getMe };
