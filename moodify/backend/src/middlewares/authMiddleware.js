@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import blacklistModel from "../models/blacklist.model.js";
 import redis from "../config/redisClient.js";
 
 async function identifyUser(req, res, next) {
