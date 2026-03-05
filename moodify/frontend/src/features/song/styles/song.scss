@@ -141,7 +141,10 @@ $text-gray: #b3b3b3;
     }
   }
 }
-
+.loader {
+  position: absolute;
+  bottom: 10%;
+}
 // Mobile Tweaks
 @media (max-width: 768px) {
   .volume-control {

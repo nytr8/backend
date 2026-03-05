@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_BASE_URL = "http://localhost:3000/api/songs";
+const API_BASE_URL = "http://localhost:3000/api/song/getSong";
 
 const app = axios.create({
   baseURL: API_BASE_URL,
@@ -7,6 +7,6 @@ const app = axios.create({
 });
 
 export async function getSong(mood) {
-  const response = await app.get(`/?mood=${mood}`);
+  const response = await app.get(`?mood=${mood}`);
   return response.data;
 }

@@ -34,5 +34,14 @@ async function getMe() {
   }
   return res.data;
 }
+async function logout() {
+  let res = null;
+  try {
+    res = await api.get("/logout");
+  } catch (error) {
+    console.log(error);
+  }
+  return res.data;
+}
 
-export { register, login, getMe };
+export { register, login, getMe, logout };

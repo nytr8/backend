@@ -4,7 +4,8 @@ import { SongContextProvider } from "../SongContext";
 import { getSong } from "../services/songApi";
 
 const useSong = () => {
-  const { songData, setsongData } = useContext(SongContextProvider);
+  const context = useContext(SongContextProvider);
+  const { songData, setsongData, detectedSong, setdetectedSong } = context;
 
   async function getSongByMood(mood) {
     try {
@@ -16,7 +17,7 @@ const useSong = () => {
     }
   }
 
-  return { songData, getSongByMood };
+  return { songData, getSongByMood, detectedSong, setdetectedSong };
 };
 
 export default useSong;

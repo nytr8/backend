@@ -1,0 +1,17 @@
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logoutbtn {
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  button {
+    outline: none;
+    border: none;
+    background-color: red;
+    padding:10px 20px;
+    border-radius: 5px;
+  }
+}

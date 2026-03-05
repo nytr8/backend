@@ -1,0 +1,79 @@
+// Minimalist Variables
+$border-color: #e0e0e0;
+$text-main: #2d2d2d;
+$accent-blue: #3b82f6; // A clean, standard blue
+$bg-subtle: #f9fafb;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  // background-color: #ffffff;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  .video-wrapper {
+    position: relative;
+    line-height: 0; // Removes tiny gap under video
+
+    video {
+      width: 480px; // Slightly larger for clarity
+      border-radius: 20px;
+      background: #000;
+      border: 1px solid $text-main;
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transform: scaleX(-1);
+    }
+  }
+
+  h2 {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: $bg-subtle;
+    letter-spacing: -0.01em;
+
+    &::before {
+      content: "•";
+      color: $accent-blue;
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+  }
+
+  .detectBtn {
+    margin-top: 1rem;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    color: $accent-blue;
+    background: transparent;
+    border: 1px solid $accent-blue;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: $accent-blue;
+      color: white;
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
