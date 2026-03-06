@@ -1,89 +1,38 @@
 .container {
+  width: 100%;
+  min-height: 70vh;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border);
+  background: linear-gradient(145deg, rgba(9, 20, 38, 0.94), rgba(6, 13, 27, 0.96));
+  box-shadow: var(--shadow-card), inset 0 0 0 1px rgba(167, 92, 255, 0.12);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  font-family: "Inter", system-ui, sans-serif;
-  border: 1px solid var(--clr-accent-glow);
-  height: 70vh;
-  width: 40vw;
+  gap: 0.95rem;
+  padding: 1.2rem;
+  position: relative;
 
-  @media (max-width: 768px) {
-    width: 100%;
-    height: auto;
-    min-height: 280px;
-    padding: 1.25rem;
+  &::before {
+    content: "LIVE SCAN";
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 0.65rem;
+    letter-spacing: 0.09em;
+    color: var(--clr-accent);
+    background: rgba(167, 92, 255, 0.1);
+    border: 1px solid rgba(167, 92, 255, 0.3);
+    border-radius: 999px;
+    padding: 0.18rem 0.45rem;
   }
 
   .video-wrapper {
-    position: relative;
-    line-height: 0;
-    border: 2px solid var(--radius-lg);
-    border-radius: 10px;
-    overflow: hidden;
-
-    // Outer glow ring
-    &::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      border-radius: 26px;
-      background: linear-gradient(135deg,
-          var(--clr-accent),
-          var(--clr-accent-2),
-          #e879f9);
-      z-index: -1;
-      opacity: 0.7;
-      filter: blur(8px);
-      animation: ringPulse 3s ease-in-out infinite;
-    }
-
-    video {
-      width: 480px;
-      max-width: 100%;
-      scale: 1.4;
-      border-radius: 20px;
-      background: #000;
-      border: 1.5px solid var(--clr-border);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
-      transform: scaleX(-1);
-      display: block;
-
-      @media (max-width: 768px) {
-        width: 100%;
-        scale: 1;
-      }
-    }
-  }
-
-  h2 {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--clr-muted);
-    letter-spacing: 0.01em;
-
-    &::before {
-      content: "●";
-      color: var(--clr-accent-2);
-      margin-right: 8px;
-      animation: dot-pulse 2s ease-in-out infinite;
-    }
-  }
-
-  .detectBtn {
-    margin-top: 1.25rem;
-    padding: 10px 28px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--clr-accent-2);
-    background: transparent;
-    border: 1.5px solid var(--clr-accent);
-    border-radius: var(--radius-pill);
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    transition: all var(--transition);
+    width: min(500px, 100%);
+    border: 2px solid rgba(167, 92, 255, 0.46);
+    border-radius: 16px;
+    padding: 4px;
+    box-shadow: 0 0 20px rgba(167, 92, 255, 0.22);
     position: relative;
     overflow: hidden;
 
@@ -91,56 +40,55 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg,
-          var(--clr-accent),
-          var(--clr-accent-2));
-      opacity: 0;
-      transition: opacity var(--transition);
+      background: linear-gradient(180deg, transparent, rgba(167, 92, 255, 0.12), transparent);
+      animation: sweep 2.8s linear infinite;
+      pointer-events: none;
     }
 
-    span {
-      position: relative;
-      z-index: 1;
+    video {
+      width: 100%;
+      display: block;
+      border-radius: 12px;
+      transform: scaleX(-1);
+      object-fit: cover;
+      max-height: 330px;
+      background: #040a14;
     }
+  }
+
+  .expression-text {
+    color: #f3e9ff;
+    text-transform: uppercase;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+  }
+
+  .detectBtn {
+    border: 1px solid rgba(167, 92, 255, 0.4);
+    border-radius: 999px;
+    background: rgba(7, 20, 37, 0.95);
+    color: #d5b9ff;
+    padding: 0.62rem 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all var(--transition);
 
     &:hover {
+      background: linear-gradient(100deg, rgba(167, 92, 255, 0.18), rgba(217, 70, 239, 0.18));
       color: #fff;
-      border-color: var(--clr-accent-2);
-      box-shadow: var(--shadow-glow);
-
-      &::after {
-        opacity: 1;
-      }
-    }
-
-    &:active {
-      transform: scale(0.97);
+      box-shadow: 0 0 16px rgba(167, 92, 255, 0.25);
     }
   }
 }
 
-@keyframes ringPulse {
-
-  0%,
-  100% {
-    opacity: 0.6;
-    filter: blur(8px);
+@keyframes sweep {
+  0% {
+    transform: translateY(-110%);
   }
 
-  50% {
-    opacity: 1;
-    filter: blur(12px);
+  100% {
+    transform: translateY(110%);
   }
 }
 
-@keyframes dot-pulse {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.3;
-  }
-}

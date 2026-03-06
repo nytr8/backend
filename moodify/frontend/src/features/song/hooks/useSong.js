@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { SongContextProvider } from "../SongContext";
-import { getSong, getSonglist } from "../services/songApi";
+import { createSong, getSong, getSonglist } from "../services/songApi";
 
 const useSong = () => {
   const context = useContext(SongContextProvider);
@@ -12,6 +12,8 @@ const useSong = () => {
     setdetectedSong,
     songList,
     setSongList,
+    loading,
+    setLoading,
   } = context;
 
   async function getSongByMood(mood) {
@@ -32,6 +34,20 @@ const useSong = () => {
       throw error;
     }
   }
+  const handleCreateSong = async (songData) => {
+    try {
+      setLoading(true);
+      console.log("Loading started");
+      const data = await createSong(songData);
+      console.log("Song created:", data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    } finally {
+      setLoading(false);
+      console.log("Loading finished");
+    }
+  };
 
   return {
     songData,
@@ -40,7 +56,9 @@ const useSong = () => {
     detectedSong,
     setdetectedSong,
     songList,
+    loading,
     getSongListByMood,
+    handleCreateSong,
   };
 };
 

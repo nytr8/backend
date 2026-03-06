@@ -1,0 +1,93 @@
+.main-contianer {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(4, 9, 18, 0.72);
+  backdrop-filter: blur(7px);
+  display: grid;
+  place-items: center;
+
+  .createform-container {
+    width: min(92vw, 460px);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(146deg, rgba(8, 18, 34, 0.96), rgba(15, 31, 54, 0.93));
+    border: 1px solid var(--clr-border);
+    box-shadow: var(--shadow-card), var(--shadow-neon);
+    position: relative;
+
+    .closebtn {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      color: var(--clr-accent-2);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.72rem;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+    }
+
+    .createform {
+      display: flex;
+      flex-direction: column;
+      gap: 0.95rem;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+
+        label {
+          color: var(--clr-accent);
+          font-size: 0.74rem;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          font-weight: 700;
+        }
+
+        input {
+          border: 1px solid rgba(141, 176, 207, 0.35);
+          background: rgba(5, 13, 27, 0.94);
+          color: var(--clr-text);
+          border-radius: var(--radius-sm);
+          padding: 0.68rem 0.85rem;
+
+          &:focus {
+            outline: none;
+            border-color: var(--clr-accent);
+          }
+
+          &::file-selector-button {
+            border: 0;
+            border-radius: 999px;
+            padding: 0.36rem 0.74rem;
+            margin-right: 0.55rem;
+            background: linear-gradient(100deg, var(--clr-accent), var(--clr-accent-2));
+            color: #060f20;
+            font-weight: 700;
+            cursor: pointer;
+          }
+        }
+      }
+
+      .submit-btn {
+        border: 0;
+        border-radius: var(--radius-pill);
+        padding: 0.72rem;
+        background: linear-gradient(100deg, var(--clr-accent), var(--clr-accent-3));
+        color: #07101f;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+
+        &:disabled {
+          opacity: 0.45;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+

@@ -5,6 +5,10 @@ import useSong from "../hooks/useSong";
 
 const Songs = () => {
   const { songData } = useSong();
+  const getShortTitle = (title = "") => {
+    const baseTitle = title.replace(/\.[^/.]+$/, "").trim();
+    return baseTitle.split(/\s+/).slice(0, 2).join(" ");
+  };
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -86,7 +90,7 @@ const Songs = () => {
         </div>
 
         <div className="song-details">
-          <h2 className="song-title">{songData?.title}</h2>
+          <h2 className="song-title">{getShortTitle(songData?.title)}</h2>
           <p className="artist-name">Featured Artist</p>
         </div>
 

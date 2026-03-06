@@ -5,6 +5,7 @@ export const SongContextProvider = createContext();
 const SongContext = ({ children }) => {
   const [songData, setsongData] = useState(null);
   const [detectedSong, setdetectedSong] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [songList, setSongList] = useState([]);
   return (
     <SongContextProvider.Provider
@@ -15,6 +16,8 @@ const SongContext = ({ children }) => {
         setdetectedSong,
         songList,
         setSongList,
+        loading,
+        setLoading,
       }}
     >
       {children}

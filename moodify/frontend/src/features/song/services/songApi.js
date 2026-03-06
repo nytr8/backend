@@ -14,3 +14,12 @@ export async function getSonglist(mood) {
   const response = await app.get(`/getSongList?mood=${mood}`);
   return response.data;
 }
+export async function createSong(songData) {
+  let res = null;
+  try {
+    res = await app.post("/create", songData);
+  } catch (error) {
+    console.log(error);
+  }
+  return res.data;
+}

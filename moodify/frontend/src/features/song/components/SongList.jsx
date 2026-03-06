@@ -3,6 +3,10 @@ import useSong from "../hooks/useSong";
 import "../styles/songlist.scss";
 const SongList = () => {
   const { songList, detectedSong, setdetectedSong, setsongData } = useSong();
+  const getShortTitle = (title = "") => {
+    const baseTitle = title.replace(/\.[^/.]+$/, "").trim();
+    return baseTitle.split(/\s+/).slice(0, 2).join(" ");
+  };
 
   return (
     <div className="song-list">
@@ -25,7 +29,7 @@ const SongList = () => {
             />
 
             <div className="song-card__info">
-              <h3>{song?.title?.replace(/\.[^/.]+$/, '')}</h3>
+              <h3>{getShortTitle(song?.title)}</h3>
               <p>{song?.artist}</p>
             </div>
 
