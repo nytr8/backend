@@ -56,4 +56,32 @@ async function getSongByMoodController(req, res) {
     });
   }
 }
-export { createSongsController, getSongByMoodController };
+async function getSonglistByMoodController(req, res) {
+  try {
+    const { mood } = req.query;
+
+    const song = await songModel.aggregate([
+      { $match: { mood: mood } },
+      { $sample: { size: 5 } },
+    ]);
+    if (!song.length) {
+      return res.status(404).json({
+        message: "No songs found for the specified mood",
+      });
+    }
+
+    res.status(200).json({
+      message: "Song list retrieved based on mood successfully",
+      data: song,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+}
+export {
+  createSongsController,
+  getSongByMoodController,
+  getSonglistByMoodController,
+};

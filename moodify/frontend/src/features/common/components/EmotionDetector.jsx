@@ -6,12 +6,13 @@ import useSong from "../../song/hooks/useSong";
 function EmotionDetector() {
   const videoRef = useRef(null);
   const [detect, setdetect] = useState("");
-  const [expression, setExpression] = useState("Detecting...");
-  const { getSongByMood, setdetectedSong } = useSong();
+  const [expression, setExpression] = useState("...");
+  const { getSongByMood, setdetectedSong, getSongListByMood } = useSong();
 
   useEffect(() => {
     if (!detect) return;
     getSongByMood(detect);
+    getSongListByMood(detect);
     setdetectedSong(detect);
   }, [detect]);
 

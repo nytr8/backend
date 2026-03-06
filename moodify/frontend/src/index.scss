@@ -1,3 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+// ── Global Design Tokens ──────────────────────────────────────────────────────
+:root {
+  --clr-bg:         #0d0d14;
+  --clr-surface:    #13131f;
+  --clr-surface-2:  #1a1a2e;
+  --clr-border:     rgba(120, 100, 220, 0.15);
+
+  --clr-accent:     #7c3aed;          // violet-600
+  --clr-accent-2:   #a855f7;          // purple-500
+  --clr-accent-glow:rgba(124, 58, 237, 0.35);
+
+  --clr-text:       #f1f0ff;
+  --clr-muted:      #8b8aab;
+
+  --radius-sm:      8px;
+  --radius-md:      16px;
+  --radius-lg:      24px;
+  --radius-pill:    999px;
+
+  --shadow-card:    0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-glow:    0 0 24px rgba(124, 58, 237, 0.3);
+
+  --transition:     0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,21 +32,30 @@
 }
 
 html,
-body {
+body,
+#root {
   height: 100%;
   width: 100%;
 }
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  color-scheme: dark;
+  color: var(--clr-text);
+  background-color: var(--clr-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+// Thin scrollbar
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--clr-accent);
+  border-radius: var(--radius-pill);
 }

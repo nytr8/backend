@@ -1,88 +1,144 @@
-// Variables
-$primary-color: #4f46e5;
-$primary-hover: #4338ca;
-$bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-$text-main: #1f2937;
-$text-muted: #6b7280;
-$white: #ffffff;
-$radius: 12px;
-$shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+// ── Auth – Login / Register ───────────────────────────────────────────────────
 
 .register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: text-main;
   padding: 20px;
+  background: var(--clr-bg);
+  // Subtle radial glow behind the card
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 0%, rgba(124, 58, 237, 0.18) 0%, transparent 70%);
 
   .register-card {
-    background: $white;
-    padding: 2.5rem;
-    border-radius: $radius;
-    box-shadow: $shadow;
+    position: relative;
+    background: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    padding: 2.75rem 2.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     text-align: center;
+    // glass shimmer
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+
+    // decorative top-glow bar
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--clr-accent-2), transparent);
+      border-radius: var(--radius-pill);
+    }
+
+    // App logo / name
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 1.5rem;
+
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-2));
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: var(--shadow-glow);
+      }
+
+      span {
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        background: linear-gradient(90deg, var(--clr-accent-2), #e879f9);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+    }
 
     h2 {
-      margin-bottom: 0.5rem;
-      color: $text-main;
-      font-size: 1.8rem;
+      margin-bottom: 0.4rem;
+      color: var(--clr-text);
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
     .subtitle {
-      color: $text-muted;
+      color: var(--clr-muted);
       margin-bottom: 2rem;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
     }
 
     form {
       text-align: left;
 
       .input-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
 
         label {
           display: block;
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.45rem;
           font-weight: 500;
-          font-size: 0.85rem;
-          color: $text-main;
+          font-size: 0.8rem;
+          color: var(--clr-muted);
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
         }
 
         input {
           width: 100%;
-          padding: 0.75rem;
-          border: 1px solid #d1d5db;
-          border-radius: 8px;
-          font-size: 1rem;
-          transition: border-color 0.2s;
+          padding: 0.75rem 1rem;
+          background: var(--clr-surface-2);
+          border: 1px solid var(--clr-border);
+          border-radius: var(--radius-sm);
+          font-size: 0.95rem;
+          color: var(--clr-text);
+          transition: border-color var(--transition), box-shadow var(--transition);
+          outline: none;
+
+          &::placeholder {
+            color: var(--clr-muted);
+          }
 
           &:focus {
-            outline: none;
-            border-color: $primary-color;
-            ring: 2px solid rgba($primary-color, 0.2);
+            border-color: var(--clr-accent);
+            box-shadow: 0 0 0 3px var(--clr-accent-glow);
           }
         }
       }
 
       .submit-btn {
+        margin-top: 0.5rem;
         width: 100%;
-        padding: 0.8rem;
-        background-color: $primary-color;
-        color: white;
+        padding: 0.85rem;
+        background: linear-gradient(135deg, var(--clr-accent) 0%, var(--clr-accent-2) 100%);
+        color: #fff;
         border: none;
-        border-radius: 8px;
-        font-size: 1rem;
+        border-radius: var(--radius-sm);
+        font-size: 0.95rem;
         font-weight: 600;
         cursor: pointer;
-        transition:
-          background-color 0.2s,
-          transform 0.1s;
+        letter-spacing: 0.01em;
+        transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+        box-shadow: 0 4px 20px rgba(124, 58, 237, 0.4);
 
         &:hover:not(:disabled) {
-          background-color: $primary-hover;
+          opacity: 0.9;
+          box-shadow: 0 6px 26px rgba(124, 58, 237, 0.55);
         }
 
         &:active:not(:disabled) {
@@ -90,7 +146,7 @@ $shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
         &:disabled {
-          opacity: 0.7;
+          opacity: 0.5;
           cursor: not-allowed;
         }
       }
@@ -99,15 +155,16 @@ $shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     .login-link {
       margin-top: 1.5rem;
       font-size: 0.85rem;
-      color: $text-muted;
+      color: var(--clr-muted);
 
       a {
-        color: $primary-color;
+        color: var(--clr-accent-2);
         text-decoration: none;
         font-weight: 600;
+        transition: color var(--transition);
 
         &:hover {
-          text-decoration: underline;
+          color: #e879f9;
         }
       }
     }

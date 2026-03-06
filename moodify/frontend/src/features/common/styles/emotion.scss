@@ -1,79 +1,146 @@
-// Minimalist Variables
-$border-color: #e0e0e0;
-$text-main: #2d2d2d;
-$accent-blue: #3b82f6; // A clean, standard blue
-$bg-subtle: #f9fafb;
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
-  // background-color: #ffffff;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  border-radius: var(--radius-lg);
+  font-family: "Inter", system-ui, sans-serif;
+  border: 1px solid var(--clr-accent-glow);
+  height: 70vh;
+  width: 40vw;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    min-height: 280px;
+    padding: 1.25rem;
+  }
 
   .video-wrapper {
     position: relative;
-    line-height: 0; // Removes tiny gap under video
+    line-height: 0;
+    border: 2px solid var(--radius-lg);
+    border-radius: 10px;
+    overflow: hidden;
+
+    // Outer glow ring
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      border-radius: 26px;
+      background: linear-gradient(135deg,
+          var(--clr-accent),
+          var(--clr-accent-2),
+          #e879f9);
+      z-index: -1;
+      opacity: 0.7;
+      filter: blur(8px);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
 
     video {
-      width: 480px; // Slightly larger for clarity
+      width: 480px;
+      max-width: 100%;
+      scale: 1.4;
       border-radius: 20px;
       background: #000;
-      border: 1px solid $text-main;
-      box-shadow:
-        0 4px 6px -1px rgba(0, 0, 0, 0.1),
-        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      border: 1.5px solid var(--clr-border);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
       transform: scaleX(-1);
+      display: block;
+
+      @media (max-width: 768px) {
+        width: 100%;
+        scale: 1;
+      }
     }
   }
 
   h2 {
     margin-top: 1.5rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
-    color: $bg-subtle;
-    letter-spacing: -0.01em;
+    color: var(--clr-muted);
+    letter-spacing: 0.01em;
 
     &::before {
-      content: "•";
-      color: $accent-blue;
+      content: "●";
+      color: var(--clr-accent-2);
       margin-right: 8px;
-      animation: pulse 2s infinite;
+      animation: dot-pulse 2s ease-in-out infinite;
     }
   }
 
   .detectBtn {
-    margin-top: 1rem;
-    padding: 8px 20px;
-    font-size: 0.9rem;
-    color: $accent-blue;
+    margin-top: 1.25rem;
+    padding: 10px 28px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--clr-accent-2);
     background: transparent;
-    border: 1px solid $accent-blue;
-    border-radius: 6px;
+    border: 1.5px solid var(--clr-accent);
+    border-radius: var(--radius-pill);
     cursor: pointer;
-    transition: all 0.2s ease;
+    letter-spacing: 0.02em;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+          var(--clr-accent),
+          var(--clr-accent-2));
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
 
     &:hover {
-      background: $accent-blue;
-      color: white;
+      color: #fff;
+      border-color: var(--clr-accent-2);
+      box-shadow: var(--shadow-glow);
+
+      &::after {
+        opacity: 1;
+      }
     }
 
     &:active {
-      transform: translateY(1px);
+      transform: scale(0.97);
     }
   }
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 1;
+@keyframes ringPulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    filter: blur(8px);
   }
+
   50% {
-    opacity: 0.3;
+    opacity: 1;
+    filter: blur(12px);
   }
+}
+
+@keyframes dot-pulse {
+
+  0%,
   100% {
     opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
   }
 }

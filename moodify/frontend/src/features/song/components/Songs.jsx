@@ -4,7 +4,7 @@ import { Play, Pause, SkipForward, SkipBack, Volume2 } from "lucide-react";
 import useSong from "../hooks/useSong";
 
 const Songs = () => {
-  const { songData, detectedSong } = useSong();
+  const { songData } = useSong();
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -76,7 +76,6 @@ const Songs = () => {
 
   return (
     <div className="player-container">
-      <div>detected song : {detectedSong}</div>
       <div className="player-card">
         <div className="album-art">
           <img
